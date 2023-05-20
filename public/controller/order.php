@@ -30,7 +30,7 @@
 class Gursha_order {
 
     public function gursha_order_shortcode(){
-        echo 'Hello gursha.';
+        include gursha_PLAGIN_DIR . 'public/partials/order/index.php';
     }
 
     public function gursha_order_shortcode2(){
