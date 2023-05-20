@@ -30,6 +30,14 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
+
+if (!defined("gursha"))
+    define("gursha", "gursha");
+if (!defined("gursha_PLAGIN_DIR"))
+    define("gursha_PLAGIN_DIR", plugin_dir_path(__FILE__));
+if (!defined("gursha_PLAGIN_URL"))
+    define("gursha_PLAGIN_URL", plugin_dir_url(__FILE__));
+
 /**
  * Currently plugin version.
  * Start at version 1.0.0 and use SemVer - https://semver.org
