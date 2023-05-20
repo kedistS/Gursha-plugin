@@ -174,8 +174,9 @@ class Lounge_Managment {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 
-		$order = new Gursha_order()
+		$order = new Gursha_order();
 		$this->loader->add_shortcode( 'order_shortcode', $order, 'gursha_order_shortcode' );
+		$this->loader->add_shortcode( 'order_shortcode2', $order, 'gursha_order_shortcode2' );
 
 
 	}

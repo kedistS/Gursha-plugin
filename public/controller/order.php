@@ -28,8 +28,13 @@
  * @author     Kedist <kedistkid723@gmail.com>
  */
 class Gursha_order {
-    
+
     public function gursha_order_shortcode(){
-        echo 'Hello gursha.'
+        echo 'Hello gursha.';
     }
+
+    public function gursha_order_shortcode2(){
+        echo 'Hello gursha2.';
+    }
+
 }
