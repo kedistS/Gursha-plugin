@@ -30,11 +30,25 @@
 class Gursha_order {
 
     public function gursha_order_shortcode(){
+        // update_user_meta(get_current_user_id(), 'gursha_orders','chicken');
         include gursha_PLAGIN_DIR . 'public/partials/order/index.php';
     }
+    public function gursha_order_list(){
+        $order_lists = get_user_meta(get_current_user_id(), 'gursha_orders',true);
+        $user_data = wp_get_current_user();
+        
+        include gursha_PLAGIN_DIR . 'public/partials/order/order-list.php';
 
-    public function gursha_order_shortcode2(){
-        echo 'Hello gursha2.';
+    }
+
+    public function wp_ajax_gursha_save_orders(){
+        $order_data = array(
+            'food_quantity' => $_POST['food_quantity'],  
+            'food_item' => $_POST['food_item'] ,
+            'ordered_at' => time() ,
+        );
+        update_user_meta(get_current_user_id(), 'gursha_orders',$order_data);
+        die();
     }
 
 }

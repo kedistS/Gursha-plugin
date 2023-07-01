@@ -28,8 +28,23 @@
 
     orderBtn.addEventListener('click', function(e){
         e.preventDefault()
-        console.log('food item',foodItem.value)
-        console.log('food quantity',foodQuantity.value)
+        // console.log('food item',foodItem.value)
+        // console.log('food quantity',foodQuantity.value)
 
+        jQuery.ajax({
+            url:ajaxurl,
+            type: 'POST',
+            data:{
+                action: 'gursha_save_orders',
+                food_item: foodItem.value,
+                food_quantity: foodQuantity.value
+            },
+            success: function(sdfasdf){
+                console.log('response', sdfasdf)
+            },
+            error: function(response){
+
+            }
+        })
     })
 </script>

@@ -177,6 +177,8 @@ class Lounge_Managment {
 		$order = new Gursha_order();
 		$this->loader->add_shortcode( 'order_shortcode', $order, 'gursha_order_shortcode' );
 		$this->loader->add_shortcode( 'order_shortcode2', $order, 'gursha_order_shortcode2' );
+		$this->loader->add_shortcode( 'gursha_list_shortcode', $order, 'gursha_order_list' );
+		$this->loader->add_action( 'wp_ajax_gursha_save_orders', $order, 'wp_ajax_gursha_save_orders' );
 
 
 	}
