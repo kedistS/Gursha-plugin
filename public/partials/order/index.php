@@ -6,14 +6,15 @@
     <div class="form-input">
         <label for="food-item">Food menu</label>
         <select class="food-item" name="" id="">
-            <option value="a">A</option>
-            <option value="b">B</option>
-            <option value="c">C</option>
+            <option value="ክትፎ">ክትፎ</option>
+            <option value="ጥብስ">ጥብስ</option>
+            <option value="ጥብስ ፍርፍር">ጥብስ ፍርፍር</option>
+            <option value="በያይነት">በያይነት</option>
         </select>
     </div>
     <div class="form-input">
-        <label for="food-quenatity">Quantity</label>
-        <input type="number" name="" id="foodQuantity">
+        <label for="foodQuantity">Quantity</label>
+        <input type="number" name="" min="1" id="foodQuantity">
     </div>
     <div class="submit-order">
         <button class="gursha-submit-order">Submit</button>
@@ -40,10 +41,10 @@
                 food_quantity: foodQuantity.value
             },
             success: function(sdfasdf){
-                console.log('response', sdfasdf)
+                alert("Ordered successfully");
             },
             error: function(response){
-
+                alert("order failed");
             }
         })
     })
