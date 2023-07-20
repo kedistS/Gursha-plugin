@@ -160,7 +160,7 @@ class Lounge_Managment {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 		$role = new Gursha_role();
-		$this->loader->add_action( 'init',$role, 'xx__update_custom_roles' );
+		$this->loader->add_action( 'init', $role, 'xx__update_custom_roles' );
 
 	}
 
@@ -184,6 +184,7 @@ class Lounge_Managment {
 		$this->loader->add_shortcode( 'gursha_list_shortcode', $order, 'gursha_order_list' );
 		$this->loader->add_shortcode( 'gursha_food_list_shortcode', $order, 'gursha_food_list' );
 		$this->loader->add_action( 'wp_ajax_gursha_save_orders', $order, 'wp_ajax_gursha_save_orders' );
+		$this->loader->add_action( 'wp_ajax_gursha_save_order_status', $order, 'wp_ajax_gursha_save_order_status' );
 		
 
 

@@ -35,6 +35,7 @@ class Gursha_order {
         // print_r($wp_roles);
         //wp_enqueue_script('trial', gursha_PLAGIN_URL . 'public/js/try.js', array('jquery'), '1.0', true);
         include gursha_PLAGIN_DIR . 'public/partials/order/index.php';
+        print_r(get_user_meta(get_current_user_id(), 'gursha_orders', true));
     }
     public function gursha_order_list(){
     //     $users = get_users( array( 'fields' => array( 'ID' ) ) );
@@ -71,16 +72,26 @@ class Gursha_order {
             array(
                 'food_quantity' => $_POST['food_quantity'],  
                 'food_item' => $_POST['food_item'] ,
+                'order_status' => 'pending',
                 'ordered_at' => time() ,
             )
         );
         update_user_meta(get_current_user_id(), 'gursha_orders', $previous_order);
-
-        print_r(get_user_meta(get_current_user_id(), 'gursha_orders', true));
+        
         // update_user_meta(get_current_user_id(), 'gursha_orders',$new_order);
         die();
     }
-    
+
+    public function wp_ajax_gursha_save_order_status(){
+        $new_order_status[] = array(
+            'food_quantity' => $_GET['food_quantity'],  
+            'food_item' => $_GET['food_item'] ,
+            'order_status' => $_POST['order_status'],
+            'ordered_at' => time() ,
+        );
+        update_user_meta(get_current_user_id(), 'gursha_orders', $new_order_status);
+        die();
+    }
     
 
 }

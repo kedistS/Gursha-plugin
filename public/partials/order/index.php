@@ -20,6 +20,7 @@
         <button class="gursha-submit-order">Submit</button>
     </div>
 </form>
+<?php $order_status = 'pending' ?>
 
 <script>
     var ajaxurl = "<?php echo admin_url('admin-ajax.php')?>"
@@ -39,6 +40,7 @@
                 action: 'gursha_save_orders',
                 food_item: foodItem.value,
                 food_quantity: foodQuantity.value
+                //order_status: 
             },
             success: function(sdfasdf){
                 alert("Ordered successfully");
