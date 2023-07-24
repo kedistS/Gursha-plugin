@@ -61,15 +61,12 @@ class Gursha_order {
 
     public function wp_ajax_gursha_save_orders(){
         $previous_order = get_user_meta(get_current_user_id(), 'gursha_orders', true);
-        // $previous_order[] = array(
-        //     'food_quantity' => $_POST['food_quantity'],  
-        //     'food_item' => $_POST['food_item'] ,
-        //     'ordered_at' => time() ,
-        // );
+        $bill_id = wp_generate_uuid4();
         if(!is_array($previous_order))
             $previous_order = array();
         array_push($previous_order, 
             array(
+                'bill_id' => $bill_id,  
                 'food_quantity' => $_POST['food_quantity'],  
                 'food_item' => $_POST['food_item'] ,
                 'order_status' => 'pending',
@@ -83,13 +80,22 @@ class Gursha_order {
     }
 
     public function wp_ajax_gursha_save_order_status(){
-        $new_order_status[] = array(
-            'food_quantity' => $_GET['food_quantity'],  
-            'food_item' => $_GET['food_item'] ,
-            'order_status' => $_POST['order_status'],
-            'ordered_at' => time() ,
-        );
-        update_user_meta(get_current_user_id(), 'gursha_orders', $new_order_status);
+        $user_id = $_POST['userId'];
+        $bill_id = $_POST['billId'];
+        $updated_status = $_POST['updated_order_status'];
+
+        // $bill;
+        $user_order = get_user_meta($user_id, 'gursha_orders', true);
+        // $single_row = wp_list_filter($user_order, array('bill_id' =>$bill_id));
+        foreach($user_order as $i=>$item){
+
+            if($item['bill_id'] === $bill_id){
+                $user_order[$i]['order_status'] = $updated_status;
+            }
+        }
+        update_user_meta($user_id, 'gursha_orders', $user_order);
+
+        echo json_encode(array('status' => 'success', 'message' => $updated_status));
         die();
     }
     

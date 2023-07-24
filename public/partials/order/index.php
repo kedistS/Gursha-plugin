@@ -39,6 +39,7 @@
             data:{
                 action: 'gursha_save_orders',
                 food_item: foodItem.value,
+                
                 food_quantity: foodQuantity.value
                 //order_status: 
             },
