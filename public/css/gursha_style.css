@@ -1,0 +1,37 @@
+.food-item {
+  margin-bottom: 20px;
+}
+
+.submit-order {
+  margin-top: 20px;
+}
+
+.form-input {
+  color: #003300;
+  font-size: 20px;
+}
+
+.customer-info {
+  color: #003300;
+  font-size: 20px;
+}
+
+.customer-info-item {
+  padding: 1% 1%;
+}
+
+.customer-info input {
+  height: 30px;
+}
+
+label {
+  margin-right: 10px;
+}
+
+.customer-info-header {
+  margin: 20px 0;
+}
+h1 {
+  color: #003300;
+  font-family: "Indie Flower", cursive;
+}
