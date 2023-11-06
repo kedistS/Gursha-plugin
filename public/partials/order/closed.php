@@ -1,0 +1,1 @@
+<h2>We are closed now</h2>

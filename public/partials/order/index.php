@@ -2,10 +2,15 @@
     <div class="form-input">
         <label for="food-item">Food menu</label>
         <select class="food-item" name="" id="">
-            <option value="ክትፎ">ክትፎ</option>
-            <option value="ጥብስ">ጥብስ</option>
-            <option value="ጥብስ ፍርፍር">ጥብስ ፍርፍር</option>
-            <option value="በያይነት">በያይነት</option>
+            <?php if ($lunch) { ?>
+                <option value="ክትፎ">ክትፎ</option>
+                <option value="ጥብስ">ጥብስ</option>
+                <option value="ጥብስ ፍርፍር">ጥብስ ፍርፍር</option>
+                <option value="በያይነት">በያይነት</option>
+            <?php } else { ?>
+                <option value="ፉል">ፉል</option>
+                <option value="ፍርፍር">ፍርፍር</option>
+            <?php } ?>
         </select>
     </div>
     <div class="form-input">

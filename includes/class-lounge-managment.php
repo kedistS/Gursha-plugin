@@ -27,7 +27,8 @@
  * @subpackage Lounge_Managment/includes
  * @author     Kedist <kedistkid723@gmail.com>
  */
-class Lounge_Managment {
+class Lounge_Managment
+{
 
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
@@ -66,8 +67,9 @@ class Lounge_Managment {
 	 *
 	 * @since    1.0.0
 	 */
-	public function __construct() {
-		if ( defined( 'LOUNGE_MANAGMENT_VERSION' ) ) {
+	public function __construct()
+	{
+		if (defined('LOUNGE_MANAGMENT_VERSION')) {
 			$this->version = LOUNGE_MANAGMENT_VERSION;
 		} else {
 			$this->version = '1.0.0';
@@ -97,33 +99,34 @@ class Lounge_Managment {
 	 * @since    1.0.0
 	 * @access   private
 	 */
-	private function load_dependencies() {
+	private function load_dependencies()
+	{
 
 		/**
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-lounge-managment-loader.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-lounge-managment-loader.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-lounge-managment-i18n.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-lounge-managment-i18n.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-lounge-managment-admin.php';
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/controller/setting.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-lounge-managment-admin.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'admin/controller/setting.php';
 
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-lounge-managment-public.php';
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/controller/order.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'public/class-lounge-managment-public.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'public/controller/order.php';
 
 		$this->loader = new Lounge_Managment_Loader();
 
@@ -138,11 +141,12 @@ class Lounge_Managment {
 	 * @since    1.0.0
 	 * @access   private
 	 */
-	private function set_locale() {
+	private function set_locale()
+	{
 
 		$plugin_i18n = new Lounge_Managment_i18n();
 
-		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
+		$this->loader->add_action('plugins_loaded', $plugin_i18n, 'load_plugin_textdomain');
 
 	}
 
@@ -153,14 +157,18 @@ class Lounge_Managment {
 	 * @since    1.0.0
 	 * @access   private
 	 */
-	private function define_admin_hooks() {
+	private function define_admin_hooks()
+	{
 
-		$plugin_admin = new Lounge_Managment_Admin( $this->get_plugin_name(), $this->get_version() );
+		$plugin_admin = new Lounge_Managment_Admin($this->get_plugin_name(), $this->get_version());
 
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+		$this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
+		$this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
 		$role = new Gursha_role();
-		$this->loader->add_action( 'init', $role, 'xx__update_custom_roles' );
+		$this->loader->add_action('init', $role, 'xx__update_custom_roles');
+
+		$order = new Gursha_order();
+		$this->loader->add_action('activate_' . gursha_PLAGIN_URL, $order, 'schedule_event');
 
 	}
 
@@ -171,21 +179,25 @@ class Lounge_Managment {
 	 * @since    1.0.0
 	 * @access   private
 	 */
-	private function define_public_hooks() {
+	private function define_public_hooks()
+	{
 
-		$plugin_public = new Lounge_Managment_Public( $this->get_plugin_name(), $this->get_version() );
+		$plugin_public = new Lounge_Managment_Public($this->get_plugin_name(), $this->get_version());
 
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+		$this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_styles');
+		$this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_scripts');
 
 		$order = new Gursha_order();
-		$this->loader->add_shortcode( 'order_shortcode', $order, 'gursha_order_shortcode' );
-		$this->loader->add_shortcode( 'order_shortcode2', $order, 'gursha_order_shortcode2' );
-		$this->loader->add_shortcode( 'gursha_list_shortcode', $order, 'gursha_order_list' );
-		$this->loader->add_shortcode( 'gursha_food_list_shortcode', $order, 'gursha_food_list' );
-		$this->loader->add_action( 'wp_ajax_gursha_save_orders', $order, 'wp_ajax_gursha_save_orders' );
-		$this->loader->add_action( 'wp_ajax_gursha_save_order_status', $order, 'wp_ajax_gursha_save_order_status' );
-		
+		$this->loader->add_shortcode('order_shortcode', $order, 'gursha_order_shortcode');
+		$this->loader->add_shortcode('order_shortcode2', $order, 'gursha_order_shortcode2');
+		$this->loader->add_shortcode('gursha_list_shortcode', $order, 'gursha_order_list');
+		$this->loader->add_shortcode('gursha_food_list_shortcode', $order, 'gursha_food_list');
+		$this->loader->add_action('wp_ajax_gursha_save_orders', $order, 'wp_ajax_gursha_save_orders');
+		$this->loader->add_action('wp_ajax_gursha_save_order_status', $order, 'wp_ajax_gursha_save_order_status');
+		$this->loader->add_action('init', $order, 'schedule_event');
+		//$this->loader->add_action('bl_cron_hook', $order, 'gursha_order_shortcode');
+		//$this->loader->add_shortcode('display_html_file', $order, 'display_html_file');
+
 
 
 	}
@@ -195,7 +207,8 @@ class Lounge_Managment {
 	 *
 	 * @since    1.0.0
 	 */
-	public function run() {
+	public function run()
+	{
 		$this->loader->run();
 	}
 
@@ -206,7 +219,8 @@ class Lounge_Managment {
 	 * @since     1.0.0
 	 * @return    string    The name of the plugin.
 	 */
-	public function get_plugin_name() {
+	public function get_plugin_name()
+	{
 		return $this->plugin_name;
 	}
 
@@ -216,7 +230,8 @@ class Lounge_Managment {
 	 * @since     1.0.0
 	 * @return    Lounge_Managment_Loader    Orchestrates the hooks of the plugin.
 	 */
-	public function get_loader() {
+	public function get_loader()
+	{
 		return $this->loader;
 	}
 
@@ -226,7 +241,8 @@ class Lounge_Managment {
 	 * @since     1.0.0
 	 * @return    string    The version number of the plugin.
 	 */
-	public function get_version() {
+	public function get_version()
+	{
 		return $this->version;
 	}
 
