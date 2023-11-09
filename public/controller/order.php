@@ -151,43 +151,13 @@ class Gursha_order
     }
 
 
-    // public function add_cron_interval($schedules)
-    // {
-    //     $schedules['two_minutes'] = array(
-    //         'interval' => 2 * 60,
-    //         'display' => esc_html__('Every two minutes'),
-    //     );
-    //     return $schedules;
-    // }
-
     public function schedule_event()
     {
         if (!wp_next_scheduled('gursha_order_shortcode')) {
             wp_schedule_event(strtotime('01:00:00'), 'daily', 'gursha_order_shortcode');
         }
     }
-    // public function display_html_file()
-    // {
 
-
-    //     $current_time = time();
-    //     $interval = floor(($current_time % (2 * 60 * 2)) / 60);
-    //     $file_path = '';
-
-    //     if ($interval == 0 || $interval == 1) {
-    //         $file_path = __DIR__ . '/../partials/order/food.php';
-    //     } else {
-    //         $file_path = __DIR__ . '/../partials/order/index.php';
-    //     }
-
-    //     if (!empty($file_path) && file_exists($file_path)) {
-    //         wp_enqueue_style('gursha_style', __DIR__ . '/../css/gursha_food_list_style.css', array(), '1.0');
-    //         include $file_path;
-    //     } else {
-    //         echo 'PHP file not found.';
-    //     }
-
-    // }
 
 
 }
