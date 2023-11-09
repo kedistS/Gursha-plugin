@@ -39,7 +39,7 @@ class Gursha_order
         wp_enqueue_style('gursha_style', gursha_PLAGIN_URL . 'public/css/gursha_style.css', array(), '1.0');
         $customer_info = get_user_meta(get_current_user_id(), 'gursha_orders', true);
         $current_time = current_time('timestamp');
-        $lunch_start_time = strtotime('18:00:00');
+        $lunch_start_time = strtotime('12:00:00');
         $lunch_end_time = strtotime('20:59:59');
         $breakfast_start_time = strtotime('07:00:00');
         $breakfast_end_time = strtotime('11:59:59');
